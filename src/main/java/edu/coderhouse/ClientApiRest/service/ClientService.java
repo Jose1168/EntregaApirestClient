@@ -22,16 +22,16 @@ public class ClientService {
     public Map postClient(Client clientSaved) throws Exception {
             //Evaluo si el formato de la fecha es el correcto
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");//inicializo un formato de fecha
-            LocalDate fecha  = LocalDate.parse(clientSaved.getFechaNacimiento(), formato);//va aintentar parsear al fecha de nacimiento, en caso de que no pueda se va a generar un error
+            LocalDate fecha  = LocalDate.parse(clientSaved.getFechaNacimiento(), formato);//va a intentar parsear al fecha de nacimiento, en caso de que no pueda se va a generar un error
             //que sera atrapado por el clientControl informando error 500
 
-            //Genero un objeto del tipo LinkedHashMap por sera necesario a la hora de mostrarlo como response luego de que el post salga exitoso
+            //Genero un objeto del tipo LinkedHashMap necesario a la hora de mostrarlo como response luego de que el post salga exitoso
             Map<String, String> map = new LinkedHashMap<>();//inicializo un LinkedHashMap por que a diferencia del HashMap, este se carga los elementos de manera ordenada por orden  de carga
 
             map.put("Nombre", clientSaved.getNombre());//obtengo el nombre del cliente para cargarlo en el map
             map.put("Apellido", clientSaved.getApellido());//obtengo el apellido del cliente para cargarlo en el map
 
-            String fechaNacimiento = clientSaved.getFechaNacimiento();//obtengo el la fecha de nacimiento del cliente para cargarlo en un string
+            String fechaNacimiento = clientSaved.getFechaNacimiento();//obtengo la fecha de nacimiento del cliente para cargarlo en un string
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//inicializo un objeto del tipo SimpleDateFormat con el formato yyyy-MM-dd
             Date fechaNAcimientoDate = dateFormat.parse(fechaNacimiento);//tomo la fecha que esta como string y la parseo a date
             Date fechaActual = new Date();//tomo la fecha actual como punto de referencia para luego hacer el calculo en años
